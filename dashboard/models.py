@@ -58,3 +58,4 @@ class Task(models.Model):
     )
     task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE, related_name="task")
     assignees = models.ManyToManyField(to=settings.AUTH_USER_MODEL, related_name="task")
+    created_at = models.DateTimeField(auto_now=True)
