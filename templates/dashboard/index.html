@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <h1>Welcome to SMART IT-Company Dashboard, {{ user.username }}!</h1>
+    <hr>
+    <div>
+      <h2>Company current statistics:</h2>
+      <ul>
+        <li>
+          Total tasks created: {{ num_tasks }}
+        </li>
+        <li>
+          Last added task: {{ last_added_task.task_name }}
+        </li>
+      </ul>
+    </div>
+  {% else %}
+    <h1>Welcome to SMART IT-Company Dashboard</h1>
+    <hr>
+    <div>
+      <p>Please, log in to the system</p>
+      <span><a href="">Sign in</a></span>
+    </div>
+  {% endif %}
+{% endblock %}

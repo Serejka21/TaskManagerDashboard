@@ -6,9 +6,12 @@ from django.views import generic
 from dashboard.models import Task, TaskType
 
 
-@login_required
 def index(request):
-    return render(request, "index.html")
+    num_tasks = Task.objects.count()
+    last_added_task = Task.objects.all()
+    context = {"num_tasks": num_tasks,
+               "last_added_task": last_added_task}
+    return render(request, "dashboard/index.html", context=context)
 
 
 class TaskCategoryListView(LoginRequiredMixin, generic.ListView):
