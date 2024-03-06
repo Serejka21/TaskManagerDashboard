@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div>
+    <h3>Detail info about project - {{ project.project_name }}</h3>
+    <hr>
+    <h5>Description:</h5>
+    <p>{{ project.description }}</p>
+    <hr>
+    <p>Assignees:</p>
+      {% for assigner in project.assignees.all%}
+      <span>{{ assigner }} | </span>
+      {% endfor %}
+    <hr>
+    <h5>Task list</h5>
+    <div>
+      {% for task in project.task_list.all %}
+        <ul>
+          {% if not task.is_completed %}
+            <li>
+              <a href="{% url "dashboard:task-detail" pk=task.id %}">{{ task.task_name }}</a>
+            <p>{{ task.description }} </p>
+            <p>{{ task.deadline }}</p>
+          </li>
+          {% endif %}
+        </ul>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
