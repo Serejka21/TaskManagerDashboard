@@ -11,8 +11,8 @@
           Total tasks created: {{ num_tasks }}
         </li>
         <li>
-          Last added task: 
-          <a href="">{{ last_added_task.task_name }}</a>
+          Last added task:
+          <a href="{% url "dashboard:task-detail" pk=last_added_task.id %}">{{ last_added_task.task_name }}</a>
         </li>
       </ul>
     </div>

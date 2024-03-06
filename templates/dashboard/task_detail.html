@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+  <div>
+    <h3>Detail info about task - {{ task.task_name }}:</h3>
+    <hr>
+    <h5>Description:</h5>
+    <p>{{ task.description }}</p>
+    <hr>
+    <table>
+      <tr>
+        <th>Task type</th>
+        <th>Deadline</th>
+        <th>Status</th>
+      </tr>
+      <tr>
+        <td>{{ task.task_type }}</td>
+        <td>{{ task.deadline }}</td>
+        <td>{{ task.is_completed }}</td>
+      </tr>
+    </table>
+    <hr>
+    <div>
+      <h5>Task employees:</h5>
+      <ul>
+        {% for employee in task.assignees.all %}
+        <li>{{ employee }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    
+  </div>
+{% endblock %}

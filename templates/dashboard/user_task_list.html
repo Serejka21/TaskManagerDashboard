@@ -6,7 +6,7 @@
     {% if tasks %}
       <ul>
         {% for task in tasks %}
-          <li><a href="">{{ task.task_name }}</a></li>
+          <li><a href="{% url "dashboard:task-detail" pk=task.id %}">{{ task.task_name }}</a></li>
         {% endfor %}
       </ul>
     {% else %}
