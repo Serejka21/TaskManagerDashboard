@@ -3,12 +3,15 @@
 {% block sidebar %}
   {% if user.is_authenticated %}
     <div>
-      <p>{{ user.get_username }}</p>
-      <p><a href="">Logout</a></p>
+      <p>{{ user.username }}</p>
+      <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <input type="submit" value="Logout">
+      </form>
     </div>
   {% else %}
     <div>
-      <p><a href="">Log in</a></p>
+      <p><a href="{% url 'login' %}">Log in</a></p>
     </div>
   {% endif %}
   <nav>
@@ -16,9 +19,11 @@
       <li>
         <a href="{% url "dashboard:index" %}">Home page</a>
       </li>
+      {% if user.is_authenticated %}
       <li>
         <a href="{% url "dashboard:my-tasks" pk=user.id%}">My tasks</a>
       </li>
+      {% endif %}
       <li>
         <a href="{% url "dashboard:projects" %}">Projects</a>
       </li>
