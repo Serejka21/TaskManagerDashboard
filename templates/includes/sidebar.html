@@ -21,7 +21,7 @@
       </li>
       {% if user.is_authenticated %}
       <li>
-        <a href="{% url "dashboard:my-tasks" pk=user.id%}">My tasks</a>
+        <a href="{% url "dashboard:my-tasks" username=user.username%}">My tasks</a>
       </li>
       {% endif %}
       <li>
