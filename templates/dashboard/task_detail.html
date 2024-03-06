@@ -28,6 +28,6 @@
         {% endfor %}
       </ul>
     </div>
-    
+    <p><a href="{% url "dashboard:task-edit" pk=task.id%}">Edit current task</a></p>
   </div>
 {% endblock %}
