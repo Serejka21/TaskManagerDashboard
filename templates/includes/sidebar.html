@@ -1,7 +1,4 @@
-{% extends "base.html" %}
-
-{% block sidebar %}
-  {% if user.is_authenticated %}
+ {% if user.is_authenticated %}
     <div>
       <p>{{ user.username }}</p>
       <form action="{% url 'logout' %}" method="post">
@@ -32,4 +29,3 @@
       </li>
     </ul>
   </nav>
-{% endblock %}
