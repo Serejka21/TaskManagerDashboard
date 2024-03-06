@@ -10,7 +10,7 @@ from dashboard.models import Task, TaskType, Worker, Project
 
 def index(request):
     num_tasks = Task.objects.count()
-    last_added_task = Task.objects.all()
+    last_added_task = Task.objects.latest("created_at")
     context = {"num_tasks": num_tasks,
                "last_added_task": last_added_task}
     return render(request, "dashboard/index.html", context=context)
@@ -43,4 +43,3 @@ def user_task_list(request: HttpRequest, username: str) -> HttpResponse:
                       context=context)
 
 
-    
