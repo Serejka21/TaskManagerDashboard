@@ -59,3 +59,13 @@ class Task(models.Model):
     task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE, related_name="task")
     assignees = models.ManyToManyField(to=settings.AUTH_USER_MODEL, related_name="task")
     created_at = models.DateTimeField(auto_now=True)
+
+
+class Project(models.Model):
+    project_name = models.CharField(max_length=120, )
+    description = models.TextField()
+    is_completed = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now=True)
+    assignees = models.ManyToManyField(to=settings.AUTH_USER_MODEL,
+                                       related_name="project")
+    task_list = models.ManyToManyField(Task, related_name="project")
