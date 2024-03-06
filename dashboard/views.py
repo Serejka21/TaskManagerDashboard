@@ -18,6 +18,10 @@ def index(request):
 
 class ProjectListView(generic.ListView):
     model = Project
+    queryset = Project.objects.filter(is_completed=False)
+
+    class Meta:
+        ordering = ['-created_at']
 
 
 class ProjectDetailView(LoginRequiredMixin, generic.DetailView):

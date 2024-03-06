@@ -1,1 +1,18 @@
 {% extends "base.html" %}
+
+{% block content %}
+  <div>
+    <h4>Available project list</h4>
+    <hr>
+    <div>
+      {% for project in project_list %}
+        <div>
+          <h4>{{ project.project_name }}</h4>
+          <p>Description: {{ project.description }}</p>
+          <span>Created: {{ project.created_at }}</span>
+          <hr>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
