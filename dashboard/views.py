@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.views import generic
 
-from dashboard.models import Task, TaskType
+from dashboard.models import Task, TaskType, Worker, Project
 
 
 def index(request):
@@ -14,7 +15,20 @@ def index(request):
     return render(request, "dashboard/index.html", context=context)
 
 
-class TaskCategoryListView(LoginRequiredMixin, generic.ListView):
-    model = TaskType
-    queryset = TaskType.objects.select_related("task")
-    template_name = "dashboard/task_category_list.html"
+class ProjectListView(generic.ListView):
+    model = Project
+
+
+class ProjectDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Project
+
+
+@login_required
+def user_task_list(request: HttpRequest, pk: int) -> HttpResponse:
+    current_user = Worker.objects.get(pk=pk)
+    tasks = current_user.task.all()
+    context = {"tasks": tasks}
+    if request.method == "GET":
+        return render(request,
+                      "dashboard/user_task_list.html",
+                      context=context)

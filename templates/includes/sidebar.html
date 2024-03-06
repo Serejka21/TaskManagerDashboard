@@ -1,10 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block sidebar %}
+  {% if user.is_authenticated %}
+    <div>
+      <p>{{ user.get_username }}</p>
+      <p><a href="">Logout</a></p>
+    </div>
+  {% else %}
+    <div>
+      <p><a href="">Log in</a></p>
+    </div>
+  {% endif %}
+  <nav>
+    <ul>
+      <li>
+        <a href="{% url "dashboard:index" %}">Home page</a>
+      </li>
+      <li>
+        <a href="{% url "dashboard:my-tasks" pk=user.id%}">My tasks</a>
+      </li>
+      <li>
+        <a href="{% url "dashboard:projects" %}">Projects</a>
+      </li>
+      <li>
+        <a href="">Admin-panel</a>
+      </li>
+    </ul>
+  </nav>
+{% endblock %}
