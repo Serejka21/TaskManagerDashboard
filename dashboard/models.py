@@ -37,6 +37,9 @@ class TaskType(models.Model):
         max_length=63,
     )
 
+    def __str__(self):
+        return self.type
+
 
 class Task(models.Model):
     PRIORITY_CHOICES = [
