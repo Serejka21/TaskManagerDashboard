@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
   <div>
-    <h4>Available project list</h4>
-    <p><a href="{% url "dashboard:projects-archive" %}">show completed projects</a></p>
+    <h4>Archive project list</h4>
+    <p><a href="{% url "dashboard:projects" %}">back to active projects</a></p>
     <p>
       <a href="{% url "dashboard:project-create" %}">Create new project</a>
     </p>

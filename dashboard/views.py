@@ -27,6 +27,14 @@ class ProjectListView(generic.ListView):
     ordering = ["-created_at"]
 
 
+class ProjectArchiveListView(generic.ListView):
+    model = Project
+    queryset = Project.objects.filter(is_completed=True)
+    paginate_by = 5
+    ordering = ["-created_at"]
+    template_name = "dashboard/project_list_archive.html"
+
+
 class ProjectDetailView(LoginRequiredMixin, generic.DetailView):
     model = Project
 

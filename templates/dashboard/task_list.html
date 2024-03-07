@@ -3,7 +3,7 @@
 {% block content %}
 <div>
   <h2>All task list</h2>
-  <p><a href="{% url "dashboard:task-list-archive" %}">show completed tasks</a></p>
+  <p><a class="btn btn-primary" href="{% url "dashboard:task-list-archive" %}">show completed tasks</a></p>
   <div>
       {% for task in task_list %}
         {% if not task.is_completed %}

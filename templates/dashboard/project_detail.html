@@ -19,13 +19,12 @@
     <div>
       {% for task in project.task.all %}
         <ul>
-          {% if not task.is_completed %}
             <li>
               <a href="{% url "dashboard:task-detail" pk=task.id %}">{{ task.task_name }}</a>
             <p>{{ task.description }} </p>
             <p>{{ task.deadline }}</p>
+            <p>{{ task.is_completed }}</p>  
           </li>
-          {% endif %}
         </ul>
       {% endfor %}
     </div>

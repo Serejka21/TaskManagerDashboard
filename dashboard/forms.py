@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
+from django.db.models import Q
 
 from dashboard.models import Task, Project
 
@@ -33,3 +35,11 @@ class ProjectForm(forms.ModelForm):
     assignees = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),
         required=False)
+
+    def clean_is_completed(self):
+        is_completed = self.cleaned_data["is_completed"]
+        project = self.cleaned_data.get("id")
+        if Task.objects.filter(Q(project=project) | Q(is_completed=False)):
+            raise ValidationError("You cant complete this project, "
+                                  "because you have not completed tasks")
+        return is_completed
