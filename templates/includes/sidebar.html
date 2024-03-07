@@ -1,4 +1,4 @@
- {% if user.is_authenticated %}
+  {% if user.is_authenticated %}
     <div>
       <p>{{ user.username }}</p>
       <form action="{% url 'logout' %}" method="post">
@@ -11,24 +11,19 @@
       <p><a href="{% url 'login' %}">Log in</a></p>
     </div>
   {% endif %}
-  <nav>
-    <ul>
-      <li>
-        <a href="{% url "dashboard:index" %}">Home page</a>
-      </li>
+  <div class="sidenav">
+    <a href="{% url "dashboard:index" %}">Home page</a>
       {% if user.is_authenticated %}
-      <li>
         <a href="{% url "dashboard:my-tasks" username=user.username%}">My tasks</a>
-      </li>
       {% endif %}
-      <li>
-        <a href="{% url "dashboard:task-list" %}">All tasks</a>
-      </li>
-      <li>
-        <a href="{% url "dashboard:projects" %}">Projects</a>
-      </li>
-      <li>
-        <a href="/admin/">Admin-panel</a>
-      </li>
-    </ul>
-  </nav>
+    <a href="{% url "dashboard:task-list" %}">All tasks</a>
+    <a href="{% url "dashboard:projects" %}">Projects</a>
+    <a href="/admin/">Admin-panel</a>
+    <div class="dropdown">
+      <a href="#">Actions</a>
+        <ul class="dropdown-content">
+          <li><a href="{% url "dashboard:project-create" %}">Create project</a></li>
+          <li><a href="{% url "dashboard:task-create" %}">Create task</a></li>
+        </ul>
+    </div> 
+  </div>

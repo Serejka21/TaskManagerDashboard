@@ -8,6 +8,9 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = "__all__"
+        widgets = {
+            "deadline": forms.DateInput(attrs={"type": "date"})
+        }
 
     assignees = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),
@@ -23,6 +26,9 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = "__all__"
+        widgets = {
+            "deadline": forms.DateInput(attrs={"type": "date"})
+        }
 
     assignees = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),
