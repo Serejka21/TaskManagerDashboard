@@ -13,9 +13,8 @@
       {% endfor %}
     <hr>
     <h5>Task list</h5>
-      <p><a href="{% url "dashboard:task-create" %}">Create new task</a></p>
     <div>
-      {% for task in project.task_list.all %}
+      {% for task in project.task.all %}
         <ul>
           {% if not task.is_completed %}
             <li>

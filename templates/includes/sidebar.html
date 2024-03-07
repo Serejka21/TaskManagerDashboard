@@ -22,10 +22,13 @@
       </li>
       {% endif %}
       <li>
+        <a href="{% url "dashboard:task-list" %}">All tasks</a>
+      </li>
+      <li>
         <a href="{% url "dashboard:projects" %}">Projects</a>
       </li>
       <li>
-        <a href="">Admin-panel</a>
+        <a href="/admin/">Admin-panel</a>
       </li>
     </ul>
   </nav>

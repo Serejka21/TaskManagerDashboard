@@ -2,6 +2,9 @@
 {% block content %}
   <div>
     <h4>Available project list</h4>
+    <p>
+      <a href="{% url "dashboard:project-create" %}">Create new project</a>
+    </p>
     <hr>
     <div>
       {% for project in project_list %}

@@ -1,12 +1,14 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import transaction
+from django.db.transaction import atomic
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
-from dashboard.forms import TaskForm
+from dashboard.forms import TaskForm, ProjectForm
 from dashboard.models import Task, TaskType, Worker, Project
 
 
@@ -33,6 +35,12 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     model = Task
 
 
+class TaskListView(LoginRequiredMixin, generic.ListView):
+    model = Task
+    paginate_by = 6
+    ordering = ["-created_at"]
+
+
 def task_edit_view(request: HttpRequest, pk: int) -> HttpResponse:
     current_task = Task.objects.get(pk=pk)
     if request.method == "POST":
@@ -44,9 +52,10 @@ def task_edit_view(request: HttpRequest, pk: int) -> HttpResponse:
     else:
         form = TaskForm(instance=current_task)
     return render(request, "dashboard/task_update_form.html", context={"form": form,
-                                                             "current_task": current_task})
+                                                                       "current_task": current_task})
 
 
+@transaction.atomic
 def task_create_view(request: HttpRequest) -> HttpResponse:
     if request.method == "GET":
         context = {
@@ -57,7 +66,17 @@ def task_create_view(request: HttpRequest) -> HttpResponse:
         form = TaskForm(request.POST)
 
         if form.is_valid():
-            task = Task.objects.create(**form.cleaned_data)
+            data = {
+                "task_name": form.cleaned_data["task_name"],
+                "description": form.cleaned_data["description"],
+                "deadline": form.cleaned_data["deadline"],
+                "is_completed": form.cleaned_data["is_completed"],
+                "priority": form.cleaned_data["priority"],
+                "task_type": form.cleaned_data["task_type"],
+            }
+            task = Task.objects.create(**data)
+            task.assignees.set(form.cleaned_data["assignees"])
+            task.project.set(form.cleaned_data["project"])
             return HttpResponseRedirect(reverse("dashboard:task-detail",
                                                 kwargs={"pk": task.id}))
         context = {
@@ -80,3 +99,49 @@ def user_task_list(request: HttpRequest, username: str) -> HttpResponse:
         return render(request,
                       "dashboard/user_task_list.html",
                       context=context)
+
+
+@login_required
+def project_edit_view(request: HttpRequest, pk: int) -> HttpResponse:
+    current_project = Project.objects.get(pk=pk)
+    if request.method == "POST":
+        form = ProjectForm(request.POST, instance=current_project)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("dashboard:project-detail",
+                                                kwargs={"pk": current_project.id}))
+    else:
+        form = ProjectForm(instance=current_project)
+    return render(request,
+                  "dashboard/project_update_form.html",
+                  context={"form": form,
+                           "current_project": current_project})
+
+
+@login_required
+@transaction.atomic
+def project_create_view(request: HttpRequest) -> HttpResponse:
+    if request.method == "GET":
+        context = {
+            "form": ProjectForm()
+        }
+        return render(request, "dashboard/project_form.html", context=context)
+    if request.method == "POST":
+        form = ProjectForm(request.POST)
+
+        if form.is_valid():
+            data = {
+                "project_name": form.cleaned_data["project_name"],
+                "description": form.cleaned_data["description"],
+                "is_completed": form.cleaned_data["is_completed"],
+            }
+
+            project = Project.objects.create(**data)
+            project.assignees.set(form.cleaned_data["assignees"])
+            return HttpResponseRedirect(reverse("dashboard:project-detail",
+                                                kwargs={"pk": project.id}))
+        context = {
+            "form": form
+        }
+
+        return render(request, "dashboard/project_form.html", context=context)

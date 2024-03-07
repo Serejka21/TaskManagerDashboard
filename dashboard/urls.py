@@ -6,7 +6,10 @@ from .views import (index,
                     ProjectDetailView,
                     TaskDetailView,
                     task_edit_view,
-                    task_create_view, )
+                    task_create_view,
+                    TaskListView,
+                    project_create_view,
+                    project_edit_view, )
 
 
 urlpatterns = [
@@ -17,6 +20,15 @@ urlpatterns = [
     path("projects/<int:pk>/",
          ProjectDetailView.as_view(),
          name="project-detail"),
+    path("projects/create/",
+         project_create_view,
+         name="project-create"),
+    path("projects/<int:pk>/edit/",
+         project_edit_view,
+         name="project-edit"),
+    path("task/list/",
+         TaskListView.as_view(),
+         name="task-list"),
     path("task/create/",
          task_create_view,
          name="task-create"),

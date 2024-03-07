@@ -1,1 +1,23 @@
 {% extends "base.html" %}
+
+{% block content %}
+<div>
+  <h2>All task list</h2>
+  <div>
+      {% for task in task_list %}
+        {% if not task.is_completed %}
+          <a href="{% url "dashboard:task-detail" pk=task.id %}">
+            <div>
+              <h5>{{ task.task_name }}</h5>
+              <p>Deadline: {{ task.deadline }}</p>
+              <span>Project: {{ task.project }}</span>
+              <p>Created at: {{ task.created_at }}</p>
+            </div>
+          </a>
+        {% endif %}
+      {% empty %}
+      <p>There are no active tasks now</p>
+      {% endfor %}
+  </div>
+</div>
+{% endblock %}
