@@ -43,13 +43,13 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     model = Task
 
 
-class TaskListView(LoginRequiredMixin, generic.ListView):
+class TaskListView(generic.ListView):
     model = Task
     paginate_by = 6
     ordering = ["-created_at"]
 
 
-class TaskListArchiveView(LoginRequiredMixin, generic.ListView):
+class TaskListArchiveView(generic.ListView):
     model = Task
     paginate_by = 6
     ordering = ["-created_at"]
