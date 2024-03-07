@@ -9,7 +9,8 @@ from .views import (index,
                     task_create_view,
                     TaskListView,
                     project_create_view,
-                    project_edit_view, )
+                    project_edit_view,
+                    TaskListArchiveView, )
 
 
 urlpatterns = [
@@ -29,6 +30,9 @@ urlpatterns = [
     path("task/list/",
          TaskListView.as_view(),
          name="task-list"),
+    path("task/list/archive/",
+         TaskListArchiveView.as_view(),
+         name="task-list-archive"),
     path("task/create/",
          task_create_view,
          name="task-create"),

@@ -41,6 +41,13 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
     ordering = ["-created_at"]
 
 
+class TaskListArchiveView(LoginRequiredMixin, generic.ListView):
+    model = Task
+    paginate_by = 6
+    ordering = ["-created_at"]
+    template_name = "dashboard/task_list_archive.html"
+
+
 def task_edit_view(request: HttpRequest, pk: int) -> HttpResponse:
     current_task = Task.objects.get(pk=pk)
     if request.method == "POST":

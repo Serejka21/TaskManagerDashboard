@@ -4,7 +4,8 @@ from django.contrib.auth.admin import UserAdmin
 from dashboard.models import (Worker,
                               Project,
                               TaskType,
-                              Task)
+                              Task,
+                              Position)
 
 
 @admin.register(Worker)
@@ -21,3 +22,4 @@ class WorkerAdmin(UserAdmin):
 admin.site.register(Project)
 admin.site.register(TaskType)
 admin.site.register(Task)
+admin.site.register(Position)

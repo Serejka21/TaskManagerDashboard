@@ -31,6 +31,11 @@ class Worker(AbstractUser):
         return f"{self.first_name} {self.last_name}, " \
                f"position: {self.position}"
 
+    def has_perm_project_edit(self) -> bool:
+        if self.position.name in ["Admin", "Project Manage"]:
+            return True
+        return False
+
 
 class TaskType(models.Model):
     type = models.CharField(
