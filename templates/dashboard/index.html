@@ -2,10 +2,10 @@
 
 {% block content %}
   {% if user.is_authenticated %}
-    <h1 class="head-index">Welcome to SMART IT-Company Dashboard, {{ user.username }}!</h1>
+    <h1 class="index-h1">Welcome to SMART IT-Company Dashboard, {{ user.username }}!</h1>
     <hr>
-    <div>
-      <h2>Company current statistics:</h2>
+    <h2 class="index-h2">Company current statistics:</h2>
+    <div id="dashboard-content">
       <ul>
         <li>
           Total tasks created: {{ num_tasks }}
