@@ -3,7 +3,7 @@
 
 {% block content %}
   <h1>Create new Project</h1>
-  <form action="{% url "dashboard:project-create" %}" method="post" novalidate>
+  <form class="forms" action="{% url "dashboard:project-create" %}" method="post" novalidate>
     {% csrf_token %}
     {{ form|crispy }}
 

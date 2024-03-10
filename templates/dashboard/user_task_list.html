@@ -2,16 +2,23 @@
 
 {% block content %}
   <div>
-    <h2>My current tasks:</h2>
+    <h2 class="task-list-head">My current tasks:</h2>
     {% if tasks %}
-      <ul>
-        {% for task in tasks %}
-          <li><a href="{% url "dashboard:task-detail" pk=task.id %}">{{ task.task_name }}</a></li>
-        {% endfor %}
-      </ul>
+      <div id="dashboard-content">
+        <ul>
+          {% for task in tasks %}
+            <li><a href="{% url "dashboard:task-detail" pk=task.id %}">{{ task.task_name }}</a>
+              <p>Deadline: {{ task.deadline }}</p>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
     {% else %}
-      <p>You don`t have active tasks now, but u can choose it from Project list</p>
-      <p>Or contact your Team-lead to get new tasks</p>
+     <div class="info-userlist">
+        <p>You don`t have active tasks now, but u can choose it from 
+          <a href="{% url "dashboard:task-list" %}">Task list</a></p>
+        <p>Or contact your Team-lead to take new tasks</p>
+     </div>  
     {% endif %}
   </div>
 {% endblock %}

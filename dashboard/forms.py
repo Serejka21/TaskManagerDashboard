@@ -39,7 +39,7 @@ class ProjectForm(forms.ModelForm):
     def clean_is_completed(self):
         is_completed = self.cleaned_data["is_completed"]
         project = self.cleaned_data.get("id")
-        if Task.objects.filter(Q(project=project) | Q(is_completed=False)):
+        if is_completed and Task.objects.filter(Q(project=project) | Q(is_completed=False)):
             raise ValidationError("You cant complete this project, "
                                   "because you have not completed tasks")
         return is_completed

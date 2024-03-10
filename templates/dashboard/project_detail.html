@@ -2,31 +2,33 @@
 
 {% block content %}
   <div>
-    <h3>Detail info about project - {{ project.project_name }}</h3>
+    <h3 style="text-align: center; padding-top: 5px;">Detail info about project - {{ project.project_name }}</h3>
     {% if user.has_perm_project_edit %}
-    <span><a href="{% url "dashboard:project-edit" pk=project.id %}">Edit project</a></span>
+    <span><a class="edit-link" href="{% url "dashboard:project-edit" pk=project.id %}">Edit project</a>
+    </span>
     {% endif %}
     <hr>
-    <h5>Description:</h5>
-    <p>{{ project.description }}</p>
-    <hr>
-    <p>Assignees:</p>
-      {% for assigner in project.assignees.all%}
-        <p>{{ assigner }} </p>
-      {% endfor %}
-    <hr>
-    <h5>Task list</h5><a href="{% url "dashboard:task-create" %}">create task</a>
-    <div>
-      {% for task in project.task.all %}
-        <ul>
-            <li>
-              <a href="{% url "dashboard:task-detail" pk=task.id %}">{{ task.task_name }}</a>
-            <p>{{ task.description }} </p>
-            <p>{{ task.deadline }}</p>
-            <p>{{ task.is_completed }}</p>  
-          </li>
-        </ul>
-      {% endfor %}
+    <div class="project-info">
+      <h4>Description:</h4>
+      <p>{{ project.description }}</p>
+      <hr>
+      <h4>Assignees:</h4>
+        {% for assigner in project.assignees.all%}
+          <p class="assigner-project"> {{ assigner }} </p>
+        {% endfor %}
+      <hr>
     </div>
+    <h5 style="text-align: center">Task list <a style="text-decoration: none;" href="{% url "dashboard:task-create" %}">(create task)</a></h5>
+     <div class="task-list">
+      {% for task in project.task.all %}
+        <a href="{% url "dashboard:task-detail" pk=task.id %}">
+          <div>
+            <h6 style="text-align: center">{{ task.task_name }}</h6>
+            <p>{{ task.deadline }}</p>
+            <p>Status: {{ task.is_completed }}</p>
+          </div>
+        </a>
+      {% endfor %}
+     </div>
   </div>
 {% endblock %}

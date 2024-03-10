@@ -3,7 +3,7 @@
 
 {% block content %}
   <h1>Update task {{ task.task_name }}</h1>
-  <form action="{% url "dashboard:task-edit" pk=current_task.id%}" method="post" novalidate>
+  <form class="forms" action="{% url "dashboard:task-edit" pk=current_task.id%}" method="post" novalidate>
     {% csrf_token %}
     {{ form|crispy }}
 

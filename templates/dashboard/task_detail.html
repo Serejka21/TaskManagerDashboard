@@ -2,34 +2,37 @@
 
 {% block content %}
   <div>
-    <h3>Detail info about task - {{ task.task_name }}:</h3>
+    <h3 style="text-align: center; padding-top: 5px;">Detail info about task - {{ task.task_name }}:
+    </h3>
+    <a class="edit-link" href="{% url "dashboard:task-edit" pk=task.id%}">Edit current task</a>
     <hr>
-    <h5>Description:</h5>
-    <p>{{ task.description }}</p>
-    <hr>
-    <table>
-      <tr>
-        <th>Task type</th>
-        <th>Deadline</th>
-        <th>Project</th>
-        <th>Status</th>
-      </tr>
-      <tr>
-        <td>{{ task.task_type }}</td>
-        <td>{{ task.deadline }}</td>
-        <td>{{ task.project }}</td>
-        <td>{{ task.is_completed }}</td>
-      </tr>
-    </table>
-    <hr>
-    <div>
-      <h5>Task employees:</h5>
-      <ul>
-        {% for employee in task.assignees.all %}
-        <li>{{ employee }}</li>
-        {% endfor %}
-      </ul>
+    <div class="task-info">
+      <h5 style="font-weight: bold">Description:</h5>
+      <p>{{ task.description }}</p>
+      <hr>
+      <table>
+        <tr>
+          <th>Task type</th>
+          <th>Deadline</th>
+          <th>Project</th>
+          <th>Status</th>
+        </tr>
+        <tr>
+          <td>{{ task.task_type }}</td>
+          <td>{{ task.deadline }}</td>
+          <td>{{ task.project }}</td>
+          <td>{{ task.is_completed }}</td>
+        </tr>
+      </table>
+      <hr>
+      <div>
+        <h5>Task employees:</h5>
+        <ul>
+          {% for employee in task.assignees.all %}
+          <li>{{ employee }}</li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
-    <p><a href="{% url "dashboard:task-edit" pk=task.id%}">Edit current task</a></p>
   </div>
 {% endblock %}

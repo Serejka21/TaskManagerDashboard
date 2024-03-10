@@ -28,16 +28,16 @@
       </div>
 
     </div>
+  
       <div class="main">
         {% block content %}
         {% endblock %}
-      </div>
-
-      {% block pagination %}
-        {% include "includes/pagination.html" %}
-      {% endblock %}
       
-    </div>
+        {% block pagination %}
+          {% include "includes/pagination.html" %}
+        {% endblock %}
+      </div>
+      
   </div>
 </div>
 </body>

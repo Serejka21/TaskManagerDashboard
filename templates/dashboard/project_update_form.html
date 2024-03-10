@@ -3,7 +3,7 @@
 
 {% block content %}
   <h1>Edit project {{ project.project_name }}</h1>
-  <form action="{% url "dashboard:project-edit" pk=current_project.id%}" method="post" novalidate>
+  <form class="forms" action="{% url "dashboard:project-edit" pk=current_project.id%}" method="post" novalidate>
     {% csrf_token %}
     {{ form|crispy }}
 

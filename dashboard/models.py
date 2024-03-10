@@ -32,7 +32,7 @@ class Worker(AbstractUser):
                f"position: {self.position}"
 
     def has_perm_project_edit(self) -> bool:
-        if self.position.name in ["Admin", "Project Manage"]:
+        if self.position.name in ["Admin", "Project Manager"]:
             return True
         return False
 
@@ -83,3 +83,6 @@ class Task(models.Model):
                                 related_name="task",
                                 default=None)
     created_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.task_name

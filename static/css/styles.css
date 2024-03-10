@@ -13,7 +13,7 @@ p {
     display: flex;
     justify-content: space-between;
     padding-inline: 10px;
-    background: linear-gradient(140deg, #21dbd6, #b955f2); <!-- #225edf, #12eb83 -->
+    background-image: linear-gradient(140deg, #21dbd6, #b955f2); <!-- #225edf, #12eb83 -->
     animation: gradient 10s infinite linear;
 }
 
@@ -68,12 +68,10 @@ p {
     font-size: 17px;
 }
 
-
-
 .image {
     overflow: hidden;
     width: 100vw;
-    height: 100vh;
+    height: 125vh;
     position: absolute;
     z-index: -1;
 }
@@ -114,6 +112,7 @@ p {
 #dashboard-content {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 #dashboard-content ul {
@@ -136,4 +135,119 @@ p {
 
 #dashboard-content a:hover {
     text-decoration: underline;
+}
+
+.task-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.task-list div {
+    background-color: #ecf0f1;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.task-list a {
+    text-decoration: none;
+}
+
+.task-list-head {
+    padding-top: 10px;
+    text-align: center;
+    font-family: "Times New Roman", sans-serif;
+}
+
+.info-userlist {
+    height: 300px;
+    text-align: center;
+}
+
+.info-userlist p {
+    margin-top: 7%;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.archive-link {
+    text-align: center;
+    background-color: rgba(191,218,232,0.86);
+    width: 220px;
+    margin: 0 auto;
+    border-radius: 3px;
+}
+
+.pagination-center{
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+
+.forms {
+    width: 90%;
+    margin-left: 4%;
+    padding-bottom: 5px;
+}
+
+.project-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.project-list div {
+    background-color: #ecf0f1;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.project-list a {
+    text-decoration: none;
+}
+
+.edit-link {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background-color: rgba(191,218,232,0.86);
+    width: 220px;
+    margin: 0 auto;
+    border-radius: 3px;
+}
+
+.project-info * {
+    margin-left: 10px;
+}
+
+.project-info h4 {
+    font-weight: bold;
+}
+
+.assigner-project {
+    background-color: rgba(211,232,232,0.86);
+    display: flex;
+    width: max-content;
+    border-radius: 4px;
+}
+
+.task-info * {
+    margin-left: 10px;
+}
+
+.task-info table {
+    width: 98%;
+    border-collapse: collapse;
+    border-spacing: 10px;
+    background-color: rgba(196,203,232,0.86);
+}
+
+.task-info th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
 }
