@@ -45,12 +45,14 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
 
 class TaskListView(generic.ListView):
     model = Task
+    queryset = Task.objects.filter(is_completed=False)
     paginate_by = 6
     ordering = ["-created_at"]
 
 
 class TaskListArchiveView(generic.ListView):
     model = Task
+    queryset = Task.objects.filter(is_completed=True)
     paginate_by = 6
     ordering = ["-created_at"]
     template_name = "dashboard/task_list_archive.html"
@@ -88,10 +90,10 @@ def task_create_view(request: HttpRequest) -> HttpResponse:
                 "is_completed": form.cleaned_data["is_completed"],
                 "priority": form.cleaned_data["priority"],
                 "task_type": form.cleaned_data["task_type"],
+                "project": form.cleaned_data["project"]
             }
             task = Task.objects.create(**data)
             task.assignees.set(form.cleaned_data["assignees"])
-            task.project.set(form.cleaned_data["project"])
             return HttpResponseRedirect(reverse("dashboard:task-detail",
                                                 kwargs={"pk": task.id}))
         context = {
@@ -108,7 +110,7 @@ class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
 @login_required
 def user_task_list(request: HttpRequest, username: str) -> HttpResponse:
     current_user = get_user_model().objects.get(username=username)
-    tasks = current_user.task.all()
+    tasks = current_user.task.filter(is_completed=False)
     context = {"tasks": tasks}
     if request.method == "GET":
         return render(request,
