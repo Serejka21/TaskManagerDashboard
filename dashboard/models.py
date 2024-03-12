@@ -24,7 +24,6 @@ class Worker(AbstractUser):
     class Meta:
         verbose_name = "employee"
         verbose_name_plural = "employees"
-        constraints = [UniqueConstraint(fields=["username"], name="unique_username")]
         ordering = ["last_name", "first_name"]
 
     def __str__(self) -> str:

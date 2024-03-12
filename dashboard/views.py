@@ -2,14 +2,13 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
-from django.db.transaction import atomic
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse_lazy, reverse
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 from django.views import generic
 
 from dashboard.forms import TaskForm, ProjectForm
-from dashboard.models import Task, TaskType, Worker, Project
+from dashboard.models import Task, Project
 
 
 def index(request):
@@ -59,7 +58,7 @@ class TaskListArchiveView(generic.ListView):
 
 
 def task_edit_view(request: HttpRequest, pk: int) -> HttpResponse:
-    current_task = Task.objects.get(pk=pk)
+    current_task = get_object_or_404(Task, pk=pk)
     if request.method == "POST":
         form = TaskForm(request.POST, instance=current_task)
         if form.is_valid():
@@ -120,7 +119,7 @@ def user_task_list(request: HttpRequest, username: str) -> HttpResponse:
 
 @login_required
 def project_edit_view(request: HttpRequest, pk: int) -> HttpResponse:
-    current_project = Project.objects.get(pk=pk)
+    current_project = get_object_or_404(Project, pk=pk)
     if request.method == "POST":
         form = ProjectForm(request.POST, instance=current_project)
         if form.is_valid():
