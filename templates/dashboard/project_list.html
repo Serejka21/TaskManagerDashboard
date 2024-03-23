@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+  <div>
+    <h4 class="task-list-head">Available project list
+      <a class="btn btn-success" href="{% url "dashboard:project-create" %}">+ create new</a>
+    </h4>
+    <p class="archive-link"><a href="{% url "dashboard:projects-archive" %}">show completed projects</a>
+    </p>
+    <hr>
+    <div class="project-list">
+      {% for project in project_list %}
+        <a href="{% url "dashboard:project-detail" pk=project.id %}">
+          <div>
+            <h4 style="text-align: center">
+              {{ project.project_name }}
+            </h4>
+            <p>Description: {{ project.description }}</p>
+            <span>Created: {{ project.created_at }}</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

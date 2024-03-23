@@ -1,0 +1,24 @@
+ <div class="topnav">
+  <div>
+    <a href="{% url "dashboard:index" %}">Home page</a>
+      {% if user.is_authenticated %}
+        <a href="{% url "dashboard:my-tasks" username=user.username%}">My tasks</a>
+      {% endif %}
+    <a href="{% url "dashboard:task-list" %}">All tasks</a>
+    <a href="{% url "dashboard:projects" %}">Projects</a>
+    <a href="/admin/">Admin-panel</a>
+  </div>
+    {% if user.is_authenticated %}
+      <div class="sidebar-user">
+        <p>User: {{ user.username }}</p>
+        <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <input class="btn btn-danger" type="submit" value="Logout">
+        </form>
+      </div>
+      {% else %}
+        <div>
+          <a href="{% url 'login' %}">Log in</a>
+        </div>
+      {% endif %}
+ </div>

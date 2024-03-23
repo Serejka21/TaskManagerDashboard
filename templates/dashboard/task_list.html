@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+  <h2 class="task-list-head">Active task list 
+    <a class="btn btn-success" href="{% url "dashboard:task-create" %}">+ create new</a>
+  </h2>
+  <p class="archive-link"><a class="btn btn-link" href="{% url "dashboard:task-list-archive" %}">show completed tasks</a></p>
+  <hr>
+  <div class="task-list">
+      {% for task in task_list %}
+            <a href="{% url "dashboard:task-detail" pk=task.id %}">
+              <div>
+                <h5 style="text-align: center">{{ task.task_name }}</h5>
+                <p>Deadline: {{ task.deadline }}</p>
+                <span>Project: {{ task.project }}</span>
+                <p>Created at: {{ task.created_at }}</p>
+              </div>  
+            </a>
+      {% empty %}
+      <p>There are no active tasks now</p>
+      {% endfor %}
+  </div>
+</div>
+{% endblock %}

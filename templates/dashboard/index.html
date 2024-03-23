@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <h1 class="index-h1">Welcome to SMART IT-Company Dashboard, {{ user.username }}!</h1>
+    <hr>
+    <h2 class="index-h2">Company current statistics:</h2>
+    <div id="dashboard-content">
+      <ul>
+        <li>
+          Total tasks created: {{ num_tasks }}
+        </li>
+        <li>
+          Last added task:
+          {% if last_added_task %}
+          <a href="{% url "dashboard:task-detail" pk=last_added_task.id %}">{{ last_added_task.task_name }}</a>
+          {% endif %}  
+        </li>
+      </ul>
+    </div>
+  {% else %}
+    <h1>Welcome to SMART IT-Company Dashboard</h1>
+    <hr>
+    <div>
+      <p>Please, log in to the system</p>
+      <span><a href="{% url 'login' %}">Sign in</a></span>
+    </div>
+  {% endif %}
+{% endblock %}
