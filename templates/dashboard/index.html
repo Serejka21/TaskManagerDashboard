@@ -12,7 +12,9 @@
         </li>
         <li>
           Last added task:
+          {% if last_added_task %}
           <a href="{% url "dashboard:task-detail" pk=last_added_task.id %}">{{ last_added_task.task_name }}</a>
+          {% endif %}  
         </li>
       </ul>
     </div>

@@ -14,7 +14,7 @@ from dashboard.models import Task, Project
 def index(request):
     num_tasks = Task.objects.count()
     last_added_task = Task.objects.latest("created_at") \
-        if num_tasks else "No tasks added"
+        if num_tasks else None
     context = {"num_tasks": num_tasks,
                "last_added_task": last_added_task}
     return render(request, "dashboard/index.html", context=context)
