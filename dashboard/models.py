@@ -30,7 +30,8 @@ class Worker(AbstractUser):
                f"position: {self.position}"
 
     def has_perm_project_edit(self) -> bool:
-        if self.position.name in ["Admin", "Project Manager"]:
+        if (self.position
+                and self.position.name in ["Admin", "Project Manager"]):
             return True
         return False
 
