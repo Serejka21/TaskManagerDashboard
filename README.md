@@ -14,6 +14,6 @@ Project Management: Organize tasks by assigning them to specific projects, makin
 
 User Authentication: Secure user authentication system to protect user data and ensure privacy.
 
-User-admin:
-USERNAME: JohnKatner
-PASS: admin12345
+User to test service:
+USERNAME: TestUser
+PASS: test123123
