@@ -80,7 +80,8 @@ class Task(models.Model):
     project = models.ForeignKey(Project,
                                 on_delete=models.CASCADE,
                                 related_name="task",
-                                default=None)
+                                default=None,
+                                null=True,)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
