@@ -1,8 +1,8 @@
-"# TaskManagerDashboard" 
-
+# Task Manager for IT
 TaskManager is a web application designed to help you manage your tasks efficiently. It provides a user-friendly interface to create, update, and track your tasks, ensuring a streamlined task management experience.
 
-Features:
+
+## Application features
 
 Task Creation: Easily create new tasks with details such as task name, description, deadline, priority, and assignees.
 
@@ -14,6 +14,15 @@ Project Management: Organize tasks by assigning them to specific projects, makin
 
 User Authentication: Secure user authentication system to protect user data and ensure privacy.
 
-User to test service:
-USERNAME: TestUser
-PASS: test123123
+
+
+## Useful links
+
+- [Site link for test features](https://task-manager-dashboard.onrender.com/)
+
+
+## Additional info
+
+Test user with Project Manager role:
+- USERNAME: TestUser 
+- PASS: test123123
