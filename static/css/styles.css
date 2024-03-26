@@ -251,3 +251,13 @@ p {
     padding: 10px;
     border: 1px solid #ddd;
 }
+
+.task-descr {
+    height: 250px;
+    max-height: 500px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    margin-right: 1%;
+    overflow-wrap: break-word;
+}
+
