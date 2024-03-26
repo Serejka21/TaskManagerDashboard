@@ -86,3 +86,6 @@ class Task(models.Model):
 
     def __str__(self):
         return self.task_name
+
+    def task_status_repr(self) -> str:
+        return "Completed" if self.is_completed else "Not Completed"
