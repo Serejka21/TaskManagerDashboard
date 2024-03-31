@@ -25,7 +25,7 @@
           <div>
             <h6 style="text-align: center">{{ task.task_name }}</h6>
             <p>{{ task.deadline }}</p>
-            <p>Status: {{ task.is_completed }}</p>
+            <p>Status: {{ task.task_status_repr }}</p>
           </div>
         </a>
       {% endfor %}

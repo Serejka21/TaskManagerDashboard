@@ -82,7 +82,11 @@ class Task(models.Model):
                                 related_name="task",
                                 default=None,
                                 null=True,)
+
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.task_name
+
+    def task_status_repr(self) -> str:
+        return "Completed" if self.is_completed else "Not Completed"
