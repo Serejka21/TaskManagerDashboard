@@ -81,7 +81,8 @@ class Task(models.Model):
                                 on_delete=models.CASCADE,
                                 related_name="task",
                                 default=None,
-                                null=True)
+                                null=True,)
+
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
